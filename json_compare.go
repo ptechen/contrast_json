@@ -10,7 +10,7 @@ type JsonDiff struct {
 	Result  string
 }
 
-func JsonCompare(left, right map[string]interface{}, n int) {
+func JsonCompare(left, right map[string]interface{}) {
 	jsonDiffDict(left, right)
 }
 
