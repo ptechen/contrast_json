@@ -1,8 +1,13 @@
-package json_compare
+package render_compare
 
 import (
 	"fmt"
 	"reflect"
+)
+
+var (
+	Class1 = "red"
+	Class2 = "green"
 )
 
 type JsonDiff struct {
@@ -10,16 +15,16 @@ type JsonDiff struct {
 	Result  string
 }
 
-func JsonCompare(left, right map[string]interface{}) {
+func JsonCompareRender(left, right map[string]interface{}) {
 	jsonDiffDict(left, right)
 }
 
 func marshalAdd(j interface{}) string {
-	return fmt.Sprintf(`<a class='red'>%v</a>`, j)
+	return fmt.Sprintf(`<a class='%s'>%v</a>`, Class1, j)
 }
 
 func marshalSub(j interface{}) string {
-	return fmt.Sprintf(`<b class='green'>%v</b>`, j)
+	return fmt.Sprintf(`<b class='%s'>%v</b>`, Class2, j)
 }
 
 func jsonDiffDict(json1, json2 map[string]interface{}) {
