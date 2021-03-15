@@ -1,3 +1,3 @@
-module json_compare
+module github.com/ptechen/json_compare
 
 go 1.16
