@@ -153,7 +153,7 @@ func jsonDiffList(json1, json2 []interface{}, depth int, diff *JsonDiff) {
 	for i := size; i < len(json2); i++ {
 		diff.HasDiff = true
 		diff.Result = diff.Result + "\n+" + blank + marshal(json2[i])
-		json2[i] = marshalAdd(json1[i])
+		json2[i] = marshalAdd(json2[i])
 		diff.Result = diff.Result + ","
 	}
 	diff.Result = diff.Result + "\n" + blank + "]"
