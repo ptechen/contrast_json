@@ -40,14 +40,14 @@ func marshalAdd(j interface{}) interface{}{
 	switch j.(type) {
 	case map[string]interface{}:
 		if v, ok := j.(map[string]interface{}); ok {
-			for s, i := range v {
-				v[s] = marshalAdd(i)
+			for i := range v {
+				v[i] = marshalAdd(v[i])
 			}
 		}
 	case []interface{}:
 		if v, ok := j.([]interface{}); ok {
-			for s, i := range v {
-				v[s] = marshalAdd(i)
+			for i := range v {
+				v[i] = marshalAdd(v[i])
 			}
 		}
 	default:
@@ -62,13 +62,13 @@ func marshalSub(j interface{}) interface{} {
 	case map[string]interface{}:
 		if v, ok := j.(map[string]interface{}); ok {
 			for s, i := range v {
-				v[s] = marshalAdd(i)
+				v[s] = marshalSub(i)
 			}
 		}
 	case []interface{}:
 		if v, ok := j.([]interface{}); ok {
 			for s, i := range v {
-				v[s] = marshalAdd(i)
+				v[s] = marshalSub(i)
 			}
 		}
 	default:
