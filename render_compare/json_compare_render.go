@@ -43,12 +43,14 @@ func marshalAdd(j interface{}) interface{}{
 			for i := range v {
 				v[i] = marshalAdd(v[i])
 			}
+			return v
 		}
 	case []interface{}:
 		if v, ok := j.([]interface{}); ok {
 			for i := range v {
 				v[i] = marshalAdd(v[i])
 			}
+			return v
 		}
 	default:
 		res = fmt.Sprintf(`<a class='%s'>%v</a>`, Class1, j)
@@ -61,16 +63,19 @@ func marshalSub(j interface{}) interface{} {
 	switch j.(type) {
 	case map[string]interface{}:
 		if v, ok := j.(map[string]interface{}); ok {
-			for s, i := range v {
-				v[s] = marshalSub(i)
+			for i := range v {
+				v[i] = marshalSub(v[i])
 			}
+			return v
 		}
 	case []interface{}:
 		if v, ok := j.([]interface{}); ok {
-			for s, i := range v {
-				v[s] = marshalSub(i)
+			for i := range v {
+				v[i] = marshalSub(v[i])
 			}
+			return v
 		}
+
 	default:
 		res = fmt.Sprintf(`<a class='%s'>%v</a>`, Class2, j)
 	}
