@@ -35,12 +35,46 @@ func marshal(j interface{}) string {
 	return string(value)
 }
 
-func marshalAdd(j interface{}) string {
-	return fmt.Sprintf(`<a class='%s'>%v</a>`, Class1, j)
+func marshalAdd(j interface{}) interface{}{
+	var res interface{}
+	switch j.(type) {
+	case map[string]interface{}:
+		if v, ok := j.(map[string]interface{}); ok {
+			for s, i := range v {
+				v[s] = marshalAdd(i)
+			}
+		}
+	case []interface{}:
+		if v, ok := j.([]interface{}); ok {
+			for s, i := range v {
+				v[s] = marshalAdd(i)
+			}
+		}
+	default:
+		res = fmt.Sprintf(`<a class='%s'>%v</a>`, Class1, j)
+	}
+	return res
 }
 
-func marshalSub(j interface{}) string {
-	return fmt.Sprintf(`<a class='%s'>%v</a>`, Class2, j)
+func marshalSub(j interface{}) interface{} {
+	var res interface{}
+	switch j.(type) {
+	case map[string]interface{}:
+		if v, ok := j.(map[string]interface{}); ok {
+			for s, i := range v {
+				v[s] = marshalAdd(i)
+			}
+		}
+	case []interface{}:
+		if v, ok := j.([]interface{}); ok {
+			for s, i := range v {
+				v[s] = marshalAdd(i)
+			}
+		}
+	default:
+		res = fmt.Sprintf(`<a class='%s'>%v</a>`, Class2, j)
+	}
+	return res
 }
 
 func jsonDiffDict(json1, json2 map[string]interface{}, depth int, diff *JsonDiff) {
