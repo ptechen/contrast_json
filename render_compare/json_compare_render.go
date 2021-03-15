@@ -13,8 +13,8 @@ type JsonDiff struct {
 }
 
 var (
-	Class1 = "red"
-	Class2 = "green"
+	Class1 = "different_a"
+	Class2 = "different_b"
 )
 
 func JsonCompareRender(left, right map[string]interface{}, n int) (string, bool) {
